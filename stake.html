@@ -53,7 +53,7 @@
             <div id="notConnectedStake" class="not-connected">
                 <i class="fas fa-lock"></i>
                 <h2>Connect Wallet to Stake</h2>
-                <button class="btn btn-primary" onclick="connectWallet()">
+                <button class="btn btn-primary" data-connect-wallet="1">
                     <i class="fas fa-plug"></i> Connect Wallet
                 </button>
             </div>
@@ -131,7 +131,7 @@
                             <i class="fas fa-hand-rock"></i> Confirm Stake
                         </button>
                         <p class="terms">
-                            <i class="fas fa-info-circle"></i> Early unstake incurs 25% penalty. Rewards distributed daily.
+                            <i class="fas fa-info-circle"></i> Stake işlemi yalnızca gerçek staking kontratı bağlandığında aktifleşir.
                         </p>
                     </div>
 
@@ -152,19 +152,19 @@
                 <div class="contract-details">
                     <div>
                         <span>Contract Address</span>
-                        <code id="stakingContract">0xSTAKE...CONTRACT</code>
+                        <code id="stakingContract">Not configured</code>
                     </div>
                     <div>
                         <span>Total Value Locked</span>
-                        <strong id="tvl">$12.5M</strong>
+                        <strong id="tvl">—</strong>
                     </div>
                     <div>
                         <span>Participants</span>
-                        <strong id="participants">8,432</strong>
+                        <strong id="participants">—</strong>
                     </div>
                     <div>
                         <span>Audited By</span>
-                        <strong>CertiK <i class="fas fa-shield-alt"></i></strong>
+                        <strong>Not supplied</strong>
                     </div>
                 </div>
             </div>

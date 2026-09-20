@@ -14,7 +14,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="images/logo.png" alt="DIAMONDCLAW">
+                <div class="logo-placeholder">🐾</div>
                 <span>$CLAW</span>
             </div>
             <ul class="nav-links">
@@ -30,29 +30,6 @@
             </button>
         </div>
     </nav>
-
-    <!-- Wallet Selection Modal -->
-    <div id="walletModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Connect Wallet</h2>
-            <p>Select your preferred wallet to connect to DiamondClaw</p>
-            <div class="wallet-options">
-                <button class="wallet-option" id="metamaskBtn">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask">
-                    <span>MetaMask</span>
-                </button>
-                <button class="wallet-option" id="walletConnectBtn">
-                    <img src="https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Logo/Blue%20(Default)/Logo.svg" alt="WalletConnect">
-                    <span>WalletConnect</span>
-                </button>
-                <button class="wallet-option" id="coinbaseBtn">
-                    <img src="https://wallet.coinbase.com/assets/images/favicon.ico" alt="Coinbase">
-                    <span>Coinbase Wallet</span>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <section class="hero">
         <div class="hero-bg">
@@ -86,12 +63,10 @@
                 </div>
             </div>
             <div class="hero-cta">
-                <a href="trade.html" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Buy $CLAW
-                </a>
-                <a href="stake.html" class="btn btn-secondary">
-                    <i class="fas fa-hand-rock"></i> Start Staking
-                </a>
+                <a href="trade.html" class="btn btn-primary"><i class="fas fa-rocket"></i> Trade $CLAW</a>
+                <button class="btn btn-secondary" data-copy-ca><i class="fas fa-copy"></i> Copy CA</button>
+                <a class="btn btn-secondary" data-explorer target="_blank" rel="noopener"><i class="fas fa-search"></i> Explorer</a>
+                <button class="btn btn-secondary" data-add-token><i class="fas fa-plus-circle"></i> Add $CLAW</button>
             </div>
         </div>
         <div class="hero-visual">
@@ -111,22 +86,22 @@
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
                     <h3>Grip Strength</h3>
-                    <p>Your "Grip Strength" score increases every hour you hold. Stronger grip = bigger rewards.</p>
+                    <p>Your on-chain $CLAW balance is read directly from Arc Mainnet. Tier display is based on the balance thresholds configured in this site.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
                     <h3>Compound Claws</h3>
-                    <p>Auto-compound your rewards to maximize your grip power and earn exponentially.</p>
+                    <p>Reward automation will be enabled here when a verified staking/reward contract is configured.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-skull"></i></div>
                     <h3>Weak Hand Tax</h3>
-                    <p>Paper hands pay 10% sell tax, distributed to loyal diamond hand stakers.</p>
+                    <p>Any transfer or trading tax is determined by the deployed token contract. The site does not invent or assume a tax rate.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-trophy"></i></div>
                     <h3>Alpha Claw Rank</h3>
-                    <p>Reach Alpha Claw status by holding 365+ days. Exclusive NFTs and boosted rewards.</p>
+                    <p>Reach Alpha Claw status by meeting the configured balance tier. Additional rewards require an on-chain reward contract.</p>
                 </div>
             </div>
         </div>
@@ -139,21 +114,21 @@
                 <div class="pool-card">
                     <div class="pool-icon"><i class="fas fa-lock"></i></div>
                     <h3>Native Staking Pool</h3>
-                    <p>Your $CLAW tokens are locked in our audited <strong>DiamondClaw Staking Contract</strong> on Arc Network.</p>
+                    <p>Staking is ready for the UI, but a separate staking contract address has not been supplied yet.</p>
                     <ul>
-                        <li>Contract: <code>0xCLAW...STAKE</code></li>
-                        <li>Audited by: CertiK</li>
-                        <li>TVL: $12.4M</li>
+                        <li>Token CA: <code data-ca></code></li>
+                        <li>Network: Arc Mainnet</li>
+                        <li>Staking contract: Not configured</li>
                     </ul>
                 </div>
                 <div class="pool-card">
                     <div class="pool-icon"><i class="fas fa-water"></i></div>
                     <h3>LP Staking (Optional)</h3>
-                    <p>Provide liquidity on <strong>Uniswap V3 (Arc)</strong> and stake LP tokens for 2.5x rewards.</p>
+                    <p>Liquidity and trading depend on a live Arc DEX pool. The Trade page checks the configured Arc V2 pair on-chain before enabling a swap.</p>
                     <ul>
-                        <li>Pair: CLAW/ETH</li>
-                        <li>Fee Tier: 0.3%</li>
-                        <li>LP Rewards: +150% APY</li>
+                        <li>Pair: USDC / <span data-token-symbol>CLAW</span></li>
+                        <li>Network: Arc Mainnet</li>
+                        <li>Rewards: contract not configured</li>
                     </ul>
                 </div>
             </div>
@@ -166,22 +141,22 @@
             <div class="tokenomics-grid">
                 <div class="tokenomics-card">
                     <h3>Total Supply</h3>
-                    <div class="token-value">1,000,000,000</div>
+                    <div class="token-value" id="totalSupplyValue">Live</div>
                     <span class="token-label">$CLAW</span>
                 </div>
                 <div class="tokenomics-card">
                     <h3>Circulating</h3>
-                    <div class="token-value">650,000,000</div>
+                    <div class="token-value">On-chain</div>
                     <span class="token-label">$CLAW</span>
                 </div>
                 <div class="tokenomics-card">
                     <h3>Burned</h3>
-                    <div class="token-value">150,000,000</div>
+                    <div class="token-value">On-chain</div>
                     <span class="token-label">$CLAW</span>
                 </div>
                 <div class="tokenomics-card">
                     <h3>Staking Rewards</h3>
-                    <div class="token-value">35%</div>
+                    <div class="token-value">Not configured</div>
                     <span class="token-label">of Supply</span>
                 </div>
             </div>
@@ -252,7 +227,7 @@
                 <div class="footer-brand">
                     <div class="footer-logo">💎🐾</div>
                     <p>The legendary token for diamond hands only.</p>
-                    <p class="contract">Contract: <code>0xCLAW...TOKEN</code></p>
+                    <p class="contract">Contract: <code data-ca></code></p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>

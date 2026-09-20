@@ -36,7 +36,7 @@
                 <i class="fas fa-wallet"></i>
                 <h2>Wallet Not Connected</h2>
                 <p>Please connect your wallet to view your dashboard</p>
-                <button class="btn btn-primary" onclick="connectWallet()">
+                <button class="btn btn-primary" data-connect-wallet="1">
                     <i class="fas fa-plug"></i> Connect Wallet
                 </button>
             </div>
@@ -69,16 +69,16 @@
                         <div class="dash-icon purple"><i class="fas fa-lock"></i></div>
                         <div class="dash-info">
                             <h3>Staked</h3>
-                            <div class="dash-value" id="stakedAmount">0</div>
-                            <span class="dash-usd" id="stakedValue">$0.00 USD</span>
+                            <div class="dash-value" id="stakedAmount">Not configured</div>
+                            <span class="dash-usd" id="stakedValue">Staking contract required</span>
                         </div>
                     </div>
                     <div class="dash-card">
                         <div class="dash-icon gold"><i class="fas fa-gift"></i></div>
                         <div class="dash-info">
                             <h3>Pending Rewards</h3>
-                            <div class="dash-value" id="pendingRewards">0</div>
-                            <span class="dash-usd" id="rewardsValue">$0.00 USD</span>
+                            <div class="dash-value" id="pendingRewards">Not configured</div>
+                            <span class="dash-usd" id="rewardsValue">Reward contract required</span>
                         </div>
                     </div>
                 </div>
@@ -143,29 +143,10 @@
 
     <script src="js/app.js"></script>
     <script>
-        // Dashboard specific logic
-        async function updateDashboard() {
-            if (!window.web3 || !window.currentAccount) {
-                document.getElementById('notConnected').style.display = 'block';
-                document.getElementById('dashboardContent').style.display = 'none';
-                return;
-            }
-            
-            document.getElementById('notConnected').style.display = 'none';
-            document.getElementById('dashboardContent').style.display = 'block';
-            document.getElementById('connectedWallet').textContent = window.currentAccount;
-            
-            // Fetch real data from blockchain
-            await fetchUserData();
-        }
-
-        async function fetchUserData() {
-            // This would fetch from your actual smart contract
-            // For now showing the structure
-            console.log('Fetching data for:', window.currentAccount);
-        }
-
-        window.addEventListener('load', updateDashboard);
+        window.addEventListener('diamondclaw:connected', () => {
+            const el = document.getElementById('connectedWallet');
+            if (el && window.currentAccount) el.textContent = window.currentAccount;
+        });
     </script>
 </body>
 </html>
