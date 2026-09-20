@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade | DIAMONDCLAW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="DIAMONDCLAW">
+                <span>$CLAW</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="trade.html" class="active">Trade</a></li>
+                <li><a href="stake.html">Stake</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <button class="connect-btn" id="connectWallet">
+                <i class="fas fa-wallet"></i> Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="trade-page">
+        <div class="container">
+            <h1 class="page-title">Trade $CLAW</h1>
+            
+            <div class="trade-layout">
+                <!-- Swap Card -->
+                <div class="swap-card">
+                    <div class="swap-header">
+                        <h3>Swap</h3>
+                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                    </div>
+                    
+                    <div class="swap-input-group">
+                        <div class="input-header">
+                            <span>From</span>
+                            <span>Balance: 2.5 ETH</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="number" placeholder="0.0" id="fromAmount">
+                            <button class="token-selector">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+                                <span>ETH</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="input-footer">
+                            <span>~$4,250.00</span>
+                            <button class="max-btn">MAX</button>
+                        </div>
+                    </div>
+
+                    <div class="swap-arrow">
+                        <button class="switch-btn"><i class="fas fa-arrow-down"></i></button>
+                    </div>
+
+                    <div class="swap-input-group">
+                        <div class="input-header">
+                            <span>To</span>
+                            <span>Balance: 0 CLAW</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="number" placeholder="0.0" id="toAmount" readonly>
+                            <button class="token-selector">
+                                <img src="images/logo.png" alt="CLAW">
+                                <span>CLAW</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="input-footer">
+                            <span>~$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="swap-details">
+                        <div class="detail-row">
+                            <span>Rate</span>
+                            <span>1 ETH = 85,000 CLAW</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Slippage</span>
+                            <span>0.5%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Network Fee</span>
+                            <span>~$2.50</span>
+                        </div>
+                        <div class="detail-row highlight">
+                            <span>Weak Hand Tax</span>
+                            <span>%10 (goes to stakers)</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-full" id="swapBtn">
+                        <i class="fas fa-exchange-alt"></i> Swap
+                    </button>
+                </div>
+
+                <!-- Price Chart -->
+                <div class="chart-panel">
+                    <div class="chart-header">
+                        <div class="price-info">
+                            <h2>CLAW/USD</h2>
+                            <div class="current-price">
+                                <span class="price">$0.0502</span>
+                                <span class="change positive">+12.4%</span>
+                            </div>
+                        </div>
+                        <div class="timeframes">
+                            <button class="time-btn">1H</button>
+                            <button class="time-btn">24H</button>
+                            <button class="time-btn active">7D</button>
+                            <button class="time-btn">1M</button>
+                            <button class="time-btn">1Y</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            <div class="chart-line">
+                                <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+                                    <path d="M0,150 Q100,140 200,120 T400,80 T600,60 T800,30" 
+                                          fill="none" stroke="#00d4ff" stroke-width="3"/>
+                                    <path d="M0,150 Q100,140 200,120 T400,80 T600,60 T800,30 L800,200 L0,200 Z" 
+                                          fill="url(#gradient)" opacity="0.3"/>
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div class="chart-labels">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="market-stats">
+                        <div class="mstat">
+                            <span>Market Cap</span>
+                            <strong>$50.2M</strong>
+                        </div>
+                        <div class="mstat">
+                            <span>24h Volume</span>
+                            <strong>$8.4M</strong>
+                        </div>
+                        <div class="mstat">
+                            <span>Liquidity</span>
+                            <strong>$12.1M</strong>
+                        </div>
+                        <div class="mstat">
+                            <span>Holders</span>
+                            <strong>12,847</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="tx-history">
+                <h3>Recent Transactions</h3>
+                <table class="tx-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tx-type buy">Buy</span></td>
+                            <td>50,000 CLAW</td>
+                            <td>$0.048</td>
+                            <td>2 mins ago</td>
+                            <td><span class="tx-status success">Success</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tx-type sell">Sell</span></td>
+                            <td>25,000 CLAW</td>
+                            <td>$0.049</td>
+                            <td>5 mins ago</td>
+                            <td><span class="tx-status success">Success</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tx-type buy">Buy</span></td>
+                            <td>100,000 CLAW</td>
+                            <td>$0.047</td>
+                            <td>12 mins ago</td>
+                            <td><span class="tx-status success">Success</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

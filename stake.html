@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stake | DIAMONDCLAW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="DIAMONDCLAW" onerror="this.src='https://via.placeholder.com/40/00d4ff/ffffff?text=C'">
+                <span>$CLAW</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="trade.html">Trade</a></li>
+                <li><a href="stake.html" class="active">Stake</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <button class="connect-btn" id="walletBtn">
+                <i class="fas fa-wallet"></i> Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="stake-page">
+        <div class="container">
+            <h1 class="page-title">Grip & Earn</h1>
+            <p class="page-subtitle">Stake your $CLAW in our native staking pool. The longer you hold, the more you earn.</p>
+
+            <div class="pool-info">
+                <div class="info-card">
+                    <i class="fas fa-question-circle"></i>
+                    <div>
+                        <h3>Where does staking happen?</h3>
+                        <p>DIAMONDCLAW has its own <strong>native staking contract</strong>. When you stake, your tokens are locked in our audited smart contract (not Uniswap). You earn rewards from:</p>
+                        <ul>
+                            <li>📈 New token emissions (35% of supply reserved)</li>
+                            <li>💰 10% Weak Hand Tax from sellers</li>
+                            <li>🔄 Trading fees from CLAW DEX</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="notConnectedStake" class="not-connected">
+                <i class="fas fa-lock"></i>
+                <h2>Connect Wallet to Stake</h2>
+                <button class="btn btn-primary" onclick="connectWallet()">
+                    <i class="fas fa-plug"></i> Connect Wallet
+                </button>
+            </div>
+
+            <div id="stakeContent" style="display: none;">
+                <div class="insufficient-balance" id="insufficientBalance" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Insufficient CLAW Balance</h3>
+                    <p>You need at least <strong>1,000 CLAW</strong> to start staking.</p>
+                    <a href="trade.html" class="btn btn-primary">Buy CLAW</a>
+                </div>
+
+                <div class="stake-grid" id="stakeForm">
+                    <div class="stake-card calculator">
+                        <h3>Stake Calculator</h3>
+                        <div class="balance-display">
+                            <span>Available: <strong id="availableBalance">0 CLAW</strong></span>
+                        </div>
+                        <div class="calc-input">
+                            <label>Amount to Stake</label>
+                            <div class="input-with-token">
+                                <input type="number" placeholder="0.0" id="stakeAmount" min="1000">
+                                <span class="token-label">CLAW</span>
+                            </div>
+                            <small class="min-stake">Minimum: 1,000 CLAW</small>
+                        </div>
+                        <div class="calc-input">
+                            <label>Lock Period</label>
+                            <div class="lock-options">
+                                <button class="lock-btn" data-days="7" data-boost="1.0" data-apy="85">
+                                    <span>7 Days</span>
+                                    <small>1.0x | 85% APY</small>
+                                </button>
+                                <button class="lock-btn" data-days="30" data-boost="1.5" data-apy="127">
+                                    <span>30 Days</span>
+                                    <small>1.5x | 127% APY</small>
+                                </button>
+                                <button class="lock-btn active" data-days="90" data-boost="2.5" data-apy="212">
+                                    <span>90 Days</span>
+                                    <small>2.5x | 212% APY</small>
+                                </button>
+                                <button class="lock-btn" data-days="180" data-boost="5.0" data-apy="425">
+                                    <span>180 Days</span>
+                                    <small>5.0x | 425% APY</small>
+                                </button>
+                                <button class="lock-btn" data-days="365" data-boost="12.0" data-apy="1020">
+                                    <span>365 Days</span>
+                                    <small>12x | 1,020% APY</small>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="calc-results">
+                            <div class="result-row">
+                                <span>Lock Period</span>
+                                <span id="selectedDays">90 Days</span>
+                            </div>
+                            <div class="result-row">
+                                <span>Multiplier</span>
+                                <span class="highlight" id="selectedBoost">x2.5</span>
+                            </div>
+                            <div class="result-row">
+                                <span>Your APY</span>
+                                <span class="highlight" id="calculatedAPY">212%</span>
+                            </div>
+                            <div class="result-row total">
+                                <span>Est. Daily Earnings</span>
+                                <span class="highlight" id="dailyEarnings">0 CLAW</span>
+                            </div>
+                            <div class="result-row">
+                                <span>Est. Total at Unlock</span>
+                                <span class="highlight" id="totalReturn">0 CLAW</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-full" id="stakeBtn" onclick="stakeTokens()">
+                            <i class="fas fa-hand-rock"></i> Confirm Stake
+                        </button>
+                        <p class="terms">
+                            <i class="fas fa-info-circle"></i> Early unstake incurs 25% penalty. Rewards distributed daily.
+                        </p>
+                    </div>
+
+                    <div class="stake-card active-stakes">
+                        <h3>Your Active Stakes</h3>
+                        <div class="stakes-list" id="activeStakesList">
+                            <div class="empty-state">
+                                <i class="fas fa-seedling"></i>
+                                <p>No active stakes. Start earning now!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="staking-contract">
+                <h3><i class="fas fa-file-contract"></i> Staking Contract</h3>
+                <div class="contract-details">
+                    <div>
+                        <span>Contract Address</span>
+                        <code id="stakingContract">0xSTAKE...CONTRACT</code>
+                    </div>
+                    <div>
+                        <span>Total Value Locked</span>
+                        <strong id="tvl">$12.5M</strong>
+                    </div>
+                    <div>
+                        <span>Participants</span>
+                        <strong id="participants">8,432</strong>
+                    </div>
+                    <div>
+                        <span>Audited By</span>
+                        <strong>CertiK <i class="fas fa-shield-alt"></i></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

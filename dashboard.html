@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | DIAMONDCLAW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="DIAMONDCLAW" onerror="this.src='https://via.placeholder.com/40/00d4ff/ffffff?text=C'">
+                <span>$CLAW</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="trade.html">Trade</a></li>
+                <li><a href="stake.html">Stake</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <button class="connect-btn" id="walletBtn">
+                <i class="fas fa-wallet"></i> Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="dashboard-page">
+        <div class="container">
+            <div id="notConnected" class="not-connected">
+                <i class="fas fa-wallet"></i>
+                <h2>Wallet Not Connected</h2>
+                <p>Please connect your wallet to view your dashboard</p>
+                <button class="btn btn-primary" onclick="connectWallet()">
+                    <i class="fas fa-plug"></i> Connect Wallet
+                </button>
+            </div>
+
+            <div id="dashboardContent" style="display: none;">
+                <h1 class="page-title">Your Diamond Dashboard</h1>
+                <div class="wallet-info">
+                    <span id="connectedWallet">0x...0000</span>
+                    <span class="network-badge"><i class="fas fa-circle"></i> Arc Mainnet</span>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dash-card highlight">
+                        <div class="dash-icon"><i class="fas fa-hand-rock"></i></div>
+                        <div class="dash-info">
+                            <h3>Grip Strength</h3>
+                            <div class="dash-value" id="gripStrength">0</div>
+                            <span class="dash-change positive" id="gripChange">+0% this week</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-icon blue"><i class="fas fa-coins"></i></div>
+                        <div class="dash-info">
+                            <h3>$CLAW Balance</h3>
+                            <div class="dash-value" id="clawBalance">0</div>
+                            <span class="dash-usd" id="clawValue">$0.00 USD</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-icon purple"><i class="fas fa-lock"></i></div>
+                        <div class="dash-info">
+                            <h3>Staked</h3>
+                            <div class="dash-value" id="stakedAmount">0</div>
+                            <span class="dash-usd" id="stakedValue">$0.00 USD</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-icon gold"><i class="fas fa-gift"></i></div>
+                        <div class="dash-info">
+                            <h3>Pending Rewards</h3>
+                            <div class="dash-value" id="pendingRewards">0</div>
+                            <span class="dash-usd" id="rewardsValue">$0.00 USD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grip-section">
+                    <h2>Your Claw Evolution</h2>
+                    <div class="tier-status">
+                        <span id="currentTier">Baby Claw</span>
+                        <span id="nextTier">Iron Claw</span>
+                    </div>
+                    <div class="grip-visualizer" id="gripVisualizer">
+                        <div class="claw-stage" data-tier="baby"><div class="claw-img">🐾</div><span>Baby</span><small>1K+</small></div>
+                        <div class="claw-stage" data-tier="iron"><div class="claw-img">🐾</div><span>Iron</span><small>10K+</small></div>
+                        <div class="claw-stage" data-tier="steel"><div class="claw-img">💎</div><span>Steel</span><small>50K+</small></div>
+                        <div class="claw-stage" data-tier="titanium"><div class="claw-img">💎</div><span>Titanium</span><small>100K+</small></div>
+                        <div class="claw-stage" data-tier="diamond"><div class="claw-img">👑</div><span>Diamond</span><small>500K+</small></div>
+                        <div class="claw-stage" data-tier="alpha"><div class="claw-img">🌟</div><span>Alpha</span><small>1M+</small></div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="tierProgress" style="width: 0%;"></div>
+                        <span id="tierProgressText">Connect wallet to see progress</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-split">
+                    <div class="activity-panel">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list" id="activityList">
+                            <div class="empty-state">
+                                <i class="fas fa-history"></i>
+                                <p>No activity yet. Start staking to see your transactions!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-panel">
+                        <h3>Your Stats</h3>
+                        <div class="stat-row">
+                            <span>Total Staked Time</span>
+                            <span class="stat-highlight" id="stakedTime">0 Days</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Total Rewards Earned</span>
+                            <span class="stat-highlight" id="totalEarned">0 CLAW</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Current APY</span>
+                            <span class="stat-highlight" id="currentAPY">85%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Global Rank</span>
+                            <span class="stat-highlight" id="globalRank">#---</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Next Reward In</span>
+                            <span class="stat-highlight countdown" id="nextReward">--:--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Dashboard specific logic
+        async function updateDashboard() {
+            if (!window.web3 || !window.currentAccount) {
+                document.getElementById('notConnected').style.display = 'block';
+                document.getElementById('dashboardContent').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('notConnected').style.display = 'none';
+            document.getElementById('dashboardContent').style.display = 'block';
+            document.getElementById('connectedWallet').textContent = window.currentAccount;
+            
+            // Fetch real data from blockchain
+            await fetchUserData();
+        }
+
+        async function fetchUserData() {
+            // This would fetch from your actual smart contract
+            // For now showing the structure
+            console.log('Fetching data for:', window.currentAccount);
+        }
+
+        window.addEventListener('load', updateDashboard);
+    </script>
+</body>
+</html>

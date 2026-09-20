@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard | DIAMONDCLAW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="DIAMONDCLAW" onerror="this.src='https://via.placeholder.com/40/00d4ff/ffffff?text=C'">
+                <span>$CLAW</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="trade.html">Trade</a></li>
+                <li><a href="stake.html">Stake</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+            </ul>
+            <button class="connect-btn" id="walletBtn">
+                <i class="fas fa-wallet"></i> Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="leaderboard-page">
+        <div class="container">
+            <h1 class="page-title">Alpha Claw Rankings</h1>
+            <p class="page-subtitle">Ranked by total amount staked + hold duration. Only stakers appear here.</p>
+
+            <div class="lb-tabs">
+                <button class="lb-tab active" data-tab="stakers">Top Stakers</button>
+                <button class="lb-tab" data-tab="holders">Top Holders</button>
+                <button class="lb-tab" data-tab="earners">Top Earners</button>
+            </div>
+
+            <div class="podium" id="podium">
+                <!-- Top 3 dynamically loaded -->
+            </div>
+
+            <div class="lb-table-container">
+                <table class="lb-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Wallet</th>
+                            <th>Tier</th>
+                            <th>Total Staked</th>
+                            <th>Hold Time</th>
+                            <th>Grip Strength</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="lb-stats">
+                <div class="lb-stat-card">
+                    <i class="fas fa-users"></i>
+                    <h4>Total Stakers</h4>
+                    <span id="totalStakers">8,432</span>
+                </div>
+                <div class="lb-stat-card">
+                    <i class="fas fa-gem"></i>
+                    <h4>Diamond Claws</h4>
+                    <span id="diamondClaws">234</span>
+                </div>
+                <div class="lb-stat-card">
+                    <i class="fas fa-crown"></i>
+                    <h4>Alpha Claws</h4>
+                    <span id="alphaClaws">18</span>
+                </div>
+                <div class="lb-stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>Avg Stake Time</h4>
+                    <span id="avgStakeTime">147 days</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Leaderboard data structure
+        const leaderboardData = [
+            { rank: 1, address: '0x7b...4c1', tier: 'Alpha', staked: '5,800,000', time: 912, grip: 15420 },
+            { rank: 2, address: '0x3a...9f2', tier: 'Alpha', staked: '2,400,000', time: 847, grip: 9847 },
+            { rank: 3, address: '0x9c...2e8', tier: 'Diamond', staked: '1,900,000', time: 756, grip: 8932 },
+            { rank: 4, address: '0x2d...8a4', tier: 'Diamond', staked: '1,450,000', time: 654, grip: 7847 },
+            { rank: 5, address: '0x8f...3c7', tier: 'Diamond', staked: '1,280,000', time: 598, grip: 6932 },
+        ];
+
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboardBody');
+            tbody.innerHTML = leaderboardData.map(user => `
+                <tr>
+                    <td class="rank">#${user.rank}</td>
+                    <td class="wallet">
+                        <div class="avatar">${user.address.slice(0, 2)}</div>
+                        <span>${user.address}</span>
+                    </td>
+                    <td><span class="tier-badge ${user.tier.to

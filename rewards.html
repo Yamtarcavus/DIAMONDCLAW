@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards | DIAMONDCLAW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="DIAMONDCLAW">
+                <span>$CLAW</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="trade.html">Trade</a></li>
+                <li><a href="stake.html">Stake</a></li>
+                <li><a href="rewards.html" class="active">Rewards</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <button class="connect-btn" id="connectWallet">
+                <i class="fas fa-wallet"></i> Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="rewards-page">
+        <div class="container">
+            <h1 class="page-title">Claim Your Rewards</h1>
+
+            <!-- Rewards Summary -->
+            <div class="rewards-summary">
+                <div class="reward-card claimable">
+                    <div class="reward-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="reward-info">
+                        <h3>Claimable Now</h3>
+                        <div class="reward-amount">1,245.80 CLAW</div>
+                        <span class="reward-usd">~$62.29 USD</span>
+                    </div>
+                    <button class="btn btn-primary btn-large">
+                        <i class="fas fa-hand-holding-usd"></i> Claim All
+                    </button>
+                </div>
+                <div class="reward-card pending">
+                    <div class="reward-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="reward-info">
+                        <h3>Pending</h3>
+                        <div class="reward-amount">45.20 CLAW</div>
+                        <span class="reward-usd">Available in 2h 15m</span>
+                    </div>
+                </div>
+                <div class="reward-card total">
+                    <div class="reward-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="reward-info">
+                        <h3>Total Earned</h3>
+                        <div class="reward-amount">8,432.15 CLAW</div>
+                        <span class="reward-usd">All time rewards</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards Breakdown -->
+            <div class="rewards-breakdown">
+                <h2>Rewards Breakdown</h2>
+                <div class="breakdown-grid">
+                    <div class="breakdown-card">
+                        <div class="breakdown-header">
+                            <i class="fas fa-percentage"></i>
+                            <h3>Staking Rewards</h3>
+                        </div>
+                        <div class="breakdown-amount">892.50 CLAW</div>
+                        <div class="breakdown-bar">
+                            <div class="bar-fill" style="width: 72%;"></div>
+                        </div>
+                        <span class="breakdown-desc">72% of total</span>
+                    </div>
+                    <div class="breakdown-card">
+                        <div class="breakdown-header">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <h3>Weak Hand Tax</h3>
+                        </div>
+                        <div class="breakdown-amount">298.30 CLAW</div>
+                        <div class="breakdown-bar">
+                            <div class="bar-fill" style="width: 24%;"></div>
+                        </div>
+                        <span class="breakdown-desc">24% of total</span>
+                    </div>
+                    <div class="breakdown-card">
+                        <div class="breakdown-header">
+                            <i class="fas fa-users"></i>
+                            <h3>Referral Bonus</h3>
+                        </div>
+                        <div class="breakdown-amount">55.00 CLAW</div>
+                        <div class="breakdown-bar">
+                            <div class="bar-fill" style="width: 4%;"></div>
+                        </div>
+                        <span class="breakdown-desc">4% of total</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards History -->
+            <div class="rewards-history">
+                <h2>Rewards History</h2>
+                <div class="history-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Staking</button>
+                    <button class="filter-btn">Tax Share</button>
+                    <button class="filter-btn">Referrals</button>
+                </div>
+                <table class="rewards-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Source</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="reward-badge staking">Staking</span></td>
+                            <td class="amount">+45.20 CLAW</td>
+                            <td>90-Day Stake</td>
+                            <td>2 hours ago</td>
+                            <td><span class="status claimable">Claimable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="reward-badge tax">Weak Hand</span></td>
+                            <td class="amount">+12.50 CLAW</td>
+                            <td>Sell Tax Distribution</td>
+                            <td>5 hours ago</td>
+                            <td><span class="status claimed">Claimed</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="reward-badge staking">Staking</span></td>
+                            <td class="amount">+45.20 CLAW</td>
+                            <td>90-Day Stake</td>
+                            <td>1 day ago</td>
+                            <td><span class="status claimed">Claimed</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="reward-badge referral">Referral</span></td>
+                            <td class="amount">+25.00 CLAW</td>
+                            <td>Friend Staked</td>
+                            <td>2 days ago</td>
+                            <td><span class="status claimed">Claimed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Auto-Compound -->
+            <div class="autocompound-section">
+                <div class="autocompound-card">
+                    <div class="autocompound-info">
+                        <h3>Auto-Compound</h3>
+                        <p>Ödüllerinizi otomatik olarak yeniden stake edin, compound etkinliğini maksimize edin</p>
+                        <div class="compound-stats">
+                            <div>
+                                <span>Current APY</span>
+                                <strong>212.5%</strong>
+                            </div>
+                            <div>
+                                <span>With Compound</span>
+                                <strong>~285%</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="autocompound-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoCompound">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="toggle-label">Enabled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
